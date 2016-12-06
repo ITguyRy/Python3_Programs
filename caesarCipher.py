@@ -1,57 +1,77 @@
-# decode ascii encoded CAESAR CYPHER - written for Python 3
-# to run in Python 2.7, replace 'input' with 'raw_input'
+#Only lowercase Alpha CAESAR CYPHER 
 
+MAX_KEY_SIZE = 26
 
 name = input(" What is your name? ").capitalize()
 
 ed = input(name + ", Would you like to Encrypt or Decrypt?").capitalize()
+if ed == "Encrypt":
 
-
-
-if ed == "Decrypt" :
-    strASCII = '' # this will hold all 256 ASCII chars
-
-    cyphertext = input('Cyphertext: ') # the encrypted string we want to decode
-    key = int(input('Key: '))  # hint: less than 10
-
-    while key < 3:
+    plaintext = input('plaintext: ')                                         
+    while True:
         try:   
-            key = int(input('The key you provided was less than 3, go higher: '))
+           key = int(input("Insert a Numeric Value 3-{}: ".format(MAX_KEY_SIZE)))
+           if key >= 3 and key <= 26:
+                break
+           else:
+               print("Your number {} is not within the range! ".format(key))
             
         except ValueError:
             print("try again")
-        
-
-    for i in range(97,122):
-        strASCII = strASCII + chr(i)  # create string with all 256 ASCII characters
-        
-
-    for x in range(len(cyphertext)):
-        m = strASCII.find(cyphertext[x])    # m = position of this char within strASCII
-        print(cyphertext[x] + ' = ' + str(m) + ' = ' + chr(m-key))
-
-
-
-else:
+    encryption = ''
     
-    strASCII = '' 
+    for letters in plaintext:
+        if letters.isalpha():
+            num = ord(letters)
+            num = num + key
+            
+            if letters.islower():
+                if num > ord('z'):
+                    num = num - 26
+                elif num < ord('a'):
+                    num = num + 26
+                encryption = encryption + chr(num)
+            else:
+                encryption += letters
+    print ("Encrypted Message: ")
+    print (encryption)
 
-    plaintext = input('Plaintext: ') 
-    key = int(input('Key: ')) 
-
-    while key < 3:
+elif ed == "Decrypt":  
+    cyphertext = input('Cyphertext: ')
+    
+    while True:
         try:   
-            key = int(input('The key you provided was less than 3, go higher: '))
+           key = int(input("Insert a Numeric Value 1-{}: ".format(MAX_KEY_SIZE)))
+           if key >= 3 and key <= 26 :
+               break
+           else:
+               print("Your Number is not within the range! ")
+        
+            
         except ValueError:
             print("try again")
-
-    for i in range(256):
-        strASCII = strASCII + chr(i)  
-
-    for x in range(len(plaintext)):
-        m = strASCII.find(plaintext[x])    
-        print(plaintext[x] + ' = ' + str(m) + ' = ' + chr(m+key))
-
+            
+    decryption = ''
     
+    for letters in cyphertext:
+        if letters.isalpha():
+            num = ord(letters)
+            num = num - key
+            
+            if letters.islower():
+                if num > ord('z'):
+                    num = num - 26
+                elif num < ord('a'):
+                    num = num + 26
+                decryption = decryption + chr(num)
+            else:
+                decryption += letters
+    print("Decrypted Message: ")
+    print (decryption)
+
+        
+
+
+
 
 
