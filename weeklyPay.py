@@ -17,11 +17,6 @@ if hours > 0:
 
 
 
-
-
-
-
-
     def weeklypay(hours,wage,overhour) :
 
         overtime = overhour *(1.5 * wage)
