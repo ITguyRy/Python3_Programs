@@ -13,6 +13,7 @@ first_list = random.sample(range(100),10)
 second_list = random.sample(range(100),10)
 
 for elem in first_list,second_list:
-    while elem in first_list != elem in second_list:
-        if elem in first_list == elem in second_list:
+    if elem in first_list == elem in second_list:
+    #while elem in first_list != elem in second_list:
+        #if elem in first_list == elem in second_list:
             print(elem);
